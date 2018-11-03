@@ -22,6 +22,9 @@ config :tchat, TchatWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :hello, Hello.Repo,
+  adapter: Ecto.Adapters.Postgres
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
