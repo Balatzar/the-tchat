@@ -1,0 +1,8 @@
+<h1><%= @room %></h1>
+<ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" id="msg" class="form-control" placeholder="Your Message">
+  </div>
+</div>
