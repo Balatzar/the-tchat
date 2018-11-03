@@ -22,7 +22,7 @@ config :tchat, TchatWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :hello, Hello.Repo,
+config :tchat, Tchat.Repo,
   adapter: Ecto.Adapters.Postgres
 
 # ## SSL Support
