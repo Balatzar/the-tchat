@@ -48,14 +48,16 @@ if (roomH1) {
   const ul = document.getElementById("msg-list");
   const msg = document.getElementById("msg");
 
-  msg.addEventListener("keypress", function(event) {
+  msg.addEventListener("keyup", sendKeys);
+
+  function sendKeys(event) {
     channel.push("shout", {
       message: event.key,
     });
     setTimeout(() => {
       msg.value = "";
     }, 100);
-  });
+  }
 
   function appendKey(key) {
     const li = ul.lastElementChild;
