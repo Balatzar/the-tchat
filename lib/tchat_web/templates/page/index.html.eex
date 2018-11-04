@@ -1,11 +1,13 @@
-<!-- The list of messages will appear here: -->
-<ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+<h1>The Tchat</h1>
 
+<h2>Create or join a room:</h2>
 <div class="row">
-  <div class="col-xs-3">
-    <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
-  </div>
-  <div class="col-xs-9">
-    <input type="text" id="msg" class="form-control" placeholder="Your Message">
-  </div>
+  <form id="submit-room">
+    <div class="col-xs-9">
+      <input type="text" id="room-name" class="form-control" placeholder="Room name">
+    </div>
+    <div class="col-xs-3">
+      <input type="submit" class="form-control" value="GO">
+    </div>
+  </form>
 </div>

@@ -20,27 +20,55 @@ import "phoenix_html";
 
 import socket from "./socket";
 
-const channel = socket.channel(
-  "tchat:" + document.querySelector("h1").textContent,
-  {}
-);
+const submitRoom = document.getElementById("submit-room");
 
-channel.on("shout", function(payload) {
-  const li = document.createElement("li");
-  li.innerHTML = payload.message;
-  ul.appendChild(li);
-});
-
-channel.join();
-
-const ul = document.getElementById("msg-list");
-const msg = document.getElementById("msg");
-
-msg.addEventListener("keypress", function(event) {
-  channel.push("shout", {
-    message: event.key,
+if (submitRoom) {
+  submitRoom.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const roomName = document.getElementById("room-name").value;
+    roomName ? location.assign(`/${roomName}`) : null;
   });
-  setTimeout(() => {
-    msg.value = "";
-  }, 100);
-});
+}
+
+const roomH1 = document.querySelector(".js-room-name");
+
+if (roomH1) {
+  const channel = socket.channel(
+    "tchat:" + (roomH1 ? roomH1.textContent : "global"),
+    {}
+  );
+
+  channel.on("shout", function(payload) {
+    const key = payload.message;
+    key === "Enter" ? createLi("") : appendKey(key);
+  });
+
+  channel.join();
+
+  const ul = document.getElementById("msg-list");
+  const msg = document.getElementById("msg");
+
+  msg.addEventListener("keypress", function(event) {
+    channel.push("shout", {
+      message: event.key,
+    });
+    setTimeout(() => {
+      msg.value = "";
+    }, 100);
+  });
+
+  function appendKey(key) {
+    const li = ul.lastElementChild;
+    li ? appendKeyToLi(li, key) : createLi(key);
+  }
+
+  function appendKeyToLi(li, key) {
+    li.innerHTML = li.innerHTML + key;
+  }
+
+  function createLi(key) {
+    const li = document.createElement("li");
+    li.innerHTML = key;
+    ul.appendChild(li);
+  }
+}

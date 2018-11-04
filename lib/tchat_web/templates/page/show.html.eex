@@ -1,4 +1,4 @@
-<h1><%= @room %></h1>
+<h1>Welcome to the room: <span class="js-room-name"><%= @room %></span></h1>
 <ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
 
 <div class="row">
