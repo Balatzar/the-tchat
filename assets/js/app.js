@@ -52,7 +52,7 @@ if (roomH1) {
 
   function sendKeys(event) {
     channel.push("shout", {
-      message: event.key,
+      message: event.key === "Enter" ? event.key : msg.value,
     });
     setTimeout(() => {
       msg.value = "";
