@@ -54,9 +54,7 @@ if (roomH1) {
     channel.push("shout", {
       message: event.key === "Enter" ? event.key : msg.value,
     });
-    setTimeout(() => {
-      msg.value = "";
-    }, 100);
+    msg.value = "";
   }
 
   function appendKey(key) {
