@@ -52,6 +52,9 @@ if (roomH1) {
         break;
     }
   });
+  channel.on("user_joined", function() {
+    console.log("join");
+  });
 
   channel.join();
 
