@@ -40,7 +40,17 @@ if (roomH1) {
 
   channel.on("shout", function(payload) {
     const key = payload.message;
-    key === "Enter" ? createLi("") : appendKey(key);
+    switch (key) {
+      case "Enter":
+        createLi("");
+        break;
+      case "Backspace":
+        removeChar();
+        break;
+      default:
+        appendKey(key);
+        break;
+    }
   });
 
   channel.join();
@@ -49,12 +59,27 @@ if (roomH1) {
   const msg = document.getElementById("msg");
 
   msg.addEventListener("keyup", sendKeys);
+  msg.addEventListener("keydown", shouldRemoveChar); // allow to remove continuous
 
-  function sendKeys(event) {
-    channel.push("shout", {
-      message: event.key === "Enter" ? event.key : msg.value,
-    });
-    msg.value = "";
+  function shouldRemoveChar({ key }) {
+    if (key === "Backspace") {
+      channel.push("shout", {
+        message: key
+      });
+    }
+  }
+  function removeChar() {
+    const li = ul.lastElementChild;
+    li && (li.innerHTML = li.innerHTML.substring(0, li.innerHTML.length - 1));
+  }
+
+  function sendKeys({ key }) {
+    if (key !== "Backspace") {
+      channel.push("shout", {
+        message: key === "Enter" ? key : msg.value
+      });
+      msg.value = "";
+    }
   }
 
   function appendKey(key) {
